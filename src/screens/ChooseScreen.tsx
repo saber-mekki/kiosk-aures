@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
 import {
   Box,
@@ -8,22 +8,29 @@ import {
   CardMedia,
   Fade,
   Typography,
-} from '@material-ui/core';
-import { useStyles } from '../styles';
-import Logo from '../components/Logo';
-import { Store } from '../Store';
-import { setOrderType } from '../actions';
-export default function HomeScreen(props) {
+} from "@material-ui/core";
+import { useStyles } from "../styles";
+import Logo from "../components/Logo";
+import { Store } from "../Store";
+import { setOrderType } from "../actions";
+export default function HomeScreen(props: any) {
   const { dispatch } = useContext(Store);
-  const styles = useStyles();
-  const chooseHandler = (orderType) => {
+  const styles: any = useStyles();
+  const chooseHandler = (orderType: any) => {
     setOrderType(dispatch, orderType);
-    props.history.push('/order');
+    props.history.push("/order");
   };
   return (
     <Fade in={true}>
-      <Box className={[styles.root, styles.navy]}>
-        <Box className={[styles.main, styles.center]}>
+      <Box
+        style={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "#003080",
+        }}
+      >
+        <Box className={`${styles.main}${styles.center}`}>
           <Logo large></Logo>
           <Typography
             className={styles.center}
@@ -34,8 +41,8 @@ export default function HomeScreen(props) {
             Where will you be eating today?
           </Typography>
           <Box className={styles.cards}>
-            <Card className={[styles.card, styles.space]}>
-              <CardActionArea onClick={() => chooseHandler('Eat in')}>
+            <Card className={(styles.card, styles.space)}>
+              <CardActionArea onClick={() => chooseHandler("Eat in")}>
                 <CardMedia
                   component="img"
                   alt="Eat in"
@@ -54,8 +61,8 @@ export default function HomeScreen(props) {
                 </CardContent>
               </CardActionArea>
             </Card>
-            <Card className={[styles.card, styles.space]}>
-              <CardActionArea onClick={() => chooseHandler('Take out')}>
+            <Card className={`${styles.card} ${styles.space}`}>
+              <CardActionArea onClick={() => chooseHandler("Take out")}>
                 <CardMedia
                   component="img"
                   alt="Take Out"

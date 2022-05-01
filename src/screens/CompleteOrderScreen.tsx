@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from 'react';
-import { Box, Button, CircularProgress, Typography } from '@material-ui/core';
-import { useStyles } from '../styles';
-import Logo from '../components/Logo';
-import { Store } from '../Store';
-import { Alert } from '@material-ui/lab';
-import { createOrder } from '../actions';
-export default function CompleteOrderScreen(props) {
-  const styles = useStyles();
+import React, { useContext, useEffect } from "react";
+import { Box, Button, CircularProgress, Typography } from "@material-ui/core";
+import { useStyles } from "../styles";
+import Logo from "../components/Logo";
+import { Store } from "../Store";
+import { Alert } from "@material-ui/lab";
+import { createOrder } from "../actions";
+export default function CompleteOrderScreen(props: any) {
+  const styles: any = useStyles();
   const { state, dispatch } = useContext(Store);
   const { order } = state;
   const { loading, error, newOrder } = state.orderCreate;
@@ -15,11 +15,11 @@ export default function CompleteOrderScreen(props) {
     if (order.orderItems.length > 0) {
       createOrder(dispatch, order);
     }
-  }, [order]);
+  }, [order, dispatch]);
 
   return (
-    <Box className={[styles.root, styles.navy]}>
-      <Box className={[styles.main, styles.center]}>
+    <Box className={`${styles.root} ${styles.navy} `}>
+      <Box className={`${styles.main} ${styles.center} `}>
         <Box>
           <Logo large></Logo>
           {loading ? (
@@ -56,9 +56,9 @@ export default function CompleteOrderScreen(props) {
           )}
         </Box>
       </Box>
-      <Box className={[styles.center, styles.space]}>
+      <Box className={`${styles.center} ${styles.space} `}>
         <Button
-          onClick={() => props.history.push('/')}
+          onClick={() => props.history.push("/")}
           variant="contained"
           color="primary"
           className={styles.largeButton}

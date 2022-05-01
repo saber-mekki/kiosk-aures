@@ -1,10 +1,11 @@
+import React, { useContext } from 'react';
 import {
   Container,
   CssBaseline,
   Paper,
   ThemeProvider,
 } from '@material-ui/core';
-import React, { useContext } from 'react';
+
 import { Store } from './Store';
 import { Route, BrowserRouter } from 'react-router-dom';
 import ChooseScreen from './screens/ChooseScreen';

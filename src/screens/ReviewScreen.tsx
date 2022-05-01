@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Store } from '../Store';
-import { addToOrder, removeFromOrder } from '../actions';
+import React, { useContext, useEffect, useState } from "react";
+import { Store } from "../Store";
+import { addToOrder, removeFromOrder } from "../actions";
 import {
   Box,
   Button,
@@ -12,28 +12,23 @@ import {
   Grid,
   TextField,
   Typography,
-} from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import { useStyles } from '../styles';
-import Logo from '../components/Logo';
-export default function ReviewScreen(props) {
-  const styles = useStyles();
+} from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import { useStyles } from "../styles";
+import Logo from "../components/Logo";
+export default function ReviewScreen(props: any) {
+  const styles: any = useStyles();
   const { state, dispatch } = useContext(Store);
-  const {
-    orderItems,
-    itemsCount,
-    totalPrice,
-    taxPrice,
-    orderType,
-  } = state.order;
+  const { orderItems, itemsCount, totalPrice, taxPrice, orderType } =
+    state.order;
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState<any>({});
   const closeHandler = () => {
     setIsOpen(false);
   };
-  const productClickHandler = (p) => {
+  const productClickHandler = (p: any) => {
     setProduct(p);
     setIsOpen(true);
   };
@@ -47,13 +42,13 @@ export default function ReviewScreen(props) {
   };
   const procedToCheckoutHandler = () => {
     // procedToCheckout(dispatch);
-    props.history.push('/select-payment');
+    props.history.push("/select-payment");
   };
   useEffect(() => {}, []);
 
   return (
-    <Box className={[styles.root]}>
-      <Box className={[styles.main, styles.navy, styles.center]}>
+    <Box className={styles.root}>
+      <Box className={`${styles.main} ${styles.navy} ${styles.center}`}>
         <Dialog
           onClose={closeHandler}
           aria-labelledby="max-width-dialog-title"
@@ -64,7 +59,7 @@ export default function ReviewScreen(props) {
           <DialogTitle className={styles.center}>
             Add {product.name}
           </DialogTitle>
-          <Box className={[styles.row, styles.center]}>
+          <Box className={`${styles.center} ${styles.row} `}>
             <Button
               variant="contained"
               color="primary"
@@ -77,7 +72,6 @@ export default function ReviewScreen(props) {
               inputProps={{ className: styles.largeInput }}
               className={styles.largeNumber}
               type="number"
-              min={1}
               variant="filled"
               value={quantity}
             />
@@ -89,7 +83,7 @@ export default function ReviewScreen(props) {
               <AddIcon />
             </Button>
           </Box>
-          <Box className={[styles.row, styles.around]}>
+          <Box className={`${styles.row} ${styles.around} `}>
             <Button
               onClick={cancelOrRemoveFromOrder}
               variant="contained"
@@ -97,9 +91,9 @@ export default function ReviewScreen(props) {
               size="large"
               className={styles.largeButton}
             >
-              {orderItems.find((x) => x.name === product.name)
-                ? 'Remove From Order'
-                : 'Cancel'}
+              {orderItems.find((x: any) => x.name === product.name)
+                ? "Remove From Order"
+                : "Cancel"}
             </Button>
 
             <Button
@@ -113,7 +107,7 @@ export default function ReviewScreen(props) {
             </Button>
           </Box>
         </Dialog>
-        <Box className={[styles.center, styles.column]}>
+        <Box className={`${styles.center} ${styles.column} `}>
           <Logo large></Logo>
           <Typography
             gutterBottom
@@ -126,7 +120,7 @@ export default function ReviewScreen(props) {
         </Box>
 
         <Grid container>
-          {orderItems.map((orderItem) => (
+          {orderItems.map((orderItem: any) => (
             <Grid item md={12} key={orderItem.name}>
               <Card
                 className={styles.card}
@@ -134,7 +128,7 @@ export default function ReviewScreen(props) {
               >
                 <CardActionArea>
                   <CardContent>
-                    <Box className={[styles.row, styles.between]}>
+                    <Box className={`${styles.row} ${styles.between} `}>
                       <Typography
                         gutterBottom
                         variant="body2"
@@ -146,7 +140,7 @@ export default function ReviewScreen(props) {
                       <Button variant="contained">Edit</Button>
                     </Box>
 
-                    <Box className={[styles.row, styles.between]}>
+                    <Box className={`${styles.row} ${styles.between} `}>
                       <Typography
                         variant="body2"
                         color="textSecondary"
@@ -171,11 +165,11 @@ export default function ReviewScreen(props) {
       </Box>
       <Box>
         <Box>
-          <Box className={[styles.bordered, styles.space]}>
-            My Order - {orderType === 'takeout' ? 'Take out' : 'Eat in'} | Tax:
+          <Box className={`${styles.bordered} ${styles.space} `}>
+            My Order - {orderType === "takeout" ? "Take out" : "Eat in"} | Tax:
             ${taxPrice} | Total: ${totalPrice} | Items: {itemsCount}
           </Box>
-          <Box className={[styles.row, styles.around]}>
+          <Box className={`${styles.row} ${styles.around} `}>
             <Button
               onClick={() => {
                 props.history.push(`/order`);

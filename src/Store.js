@@ -1,5 +1,4 @@
-import React, { createContext, useReducer } from 'react';
-import useReducerWithThunk from 'use-reducer-thunk';
+import React, { createContext, useReducer } from "react";
 import {
   ORDER_ADD_ITEM,
   ORDER_REMOVE_ITEM,
@@ -22,7 +21,7 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDER_LIST_FAIL,
-} from './constants';
+} from "./constants";
 
 export const Store = createContext();
 
@@ -34,8 +33,8 @@ const initialState = {
   productList: { loading: true },
   order: {
     orderItems: [],
-    orderType: 'Eat in',
-    paymentType: 'Pay here',
+    orderType: "Eat in",
+    paymentType: "Pay here",
     taxPrice: 0,
     totalPrice: 0,
     itemsCount: 0,

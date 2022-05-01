@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Store } from '../Store';
+import React, { useContext, useEffect, useState } from "react";
+import { Store } from "../Store";
 import {
   addToOrder,
   clearOrder,
   listCategories,
   listProducts,
   removeFromOrder,
-} from '../actions';
+} from "../actions";
 import {
   Avatar,
   Box,
@@ -24,14 +24,14 @@ import {
   Slide,
   TextField,
   Typography,
-} from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import { Alert } from '@material-ui/lab';
-import { useStyles } from '../styles';
-import Logo from '../components/Logo';
-export default function OrderScreen(props) {
-  const styles = useStyles();
+} from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import { Alert } from "@material-ui/lab";
+import { useStyles } from "../styles";
+import Logo from "../components/Logo";
+export default function OrderScreen(props: any) {
+  const styles: any = useStyles();
   const { state, dispatch } = useContext(Store);
   const { categories, loading, error } = state.categoryList;
   const {
@@ -39,23 +39,18 @@ export default function OrderScreen(props) {
     loading: loadingProducts,
     error: errorProducts,
   } = state.productList;
-  const {
-    orderItems,
-    itemsCount,
-    totalPrice,
-    taxPrice,
-    orderType,
-  } = state.order;
+  const { orderItems, itemsCount, totalPrice, taxPrice, orderType } =
+    state.order;
 
-  const [categoryName, setCategoryName] = useState('');
+  const [categoryName, setCategoryName] = useState("");
 
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState<any>({});
   const closeHandler = () => {
     setIsOpen(false);
   };
-  const productClickHandler = (p) => {
+  const productClickHandler = (p: any) => {
     setProduct(p);
     setIsOpen(true);
   };
@@ -76,9 +71,9 @@ export default function OrderScreen(props) {
     } else {
       listProducts(dispatch, categoryName);
     }
-  }, [categories, categoryName]);
+  }, [categories, categoryName, dispatch]);
 
-  const categoryClickHandler = (name) => {
+  const categoryClickHandler = (name: any) => {
     setCategoryName(name);
     listProducts(dispatch, categoryName);
   };
@@ -96,7 +91,7 @@ export default function OrderScreen(props) {
           <DialogTitle className={styles.center}>
             Add {product.name}
           </DialogTitle>
-          <Box className={[styles.row, styles.center]}>
+          <Box className={`${styles.center} ${styles.row} `}>
             <Button
               variant="contained"
               color="primary"
@@ -107,16 +102,9 @@ export default function OrderScreen(props) {
             </Button>
             <TextField
               inputProps={{ className: styles.largeInput }}
-              InputProps={{
-                bar: true,
-                inputProps: {
-                  className: styles.largeInput,
-                },
-              }}
               className={styles.largeNumber}
               type="number"
               variant="filled"
-              min={1}
               value={quantity}
             />
             <Button
@@ -127,7 +115,7 @@ export default function OrderScreen(props) {
               <AddIcon />
             </Button>
           </Box>
-          <Box className={[styles.row, styles.around]}>
+          <Box className={`${styles.row} ${styles.around} `}>
             <Button
               onClick={cancelOrRemoveFromOrder}
               variant="contained"
@@ -135,9 +123,9 @@ export default function OrderScreen(props) {
               size="large"
               className={styles.largeButton}
             >
-              {orderItems.find((x) => x.name === product.name)
-                ? 'Remove From Order'
-                : 'Cancel'}
+              {orderItems.find((x: any) => x.name === product.name)
+                ? "Remove From Order"
+                : "Cancel"}
             </Button>
 
             <Button
@@ -161,10 +149,10 @@ export default function OrderScreen(props) {
                 <Alert severity="error">{error}</Alert>
               ) : (
                 <>
-                  <ListItem button onClick={() => categoryClickHandler('')}>
+                  <ListItem button onClick={() => categoryClickHandler("")}>
                     <Logo></Logo>
                   </ListItem>
-                  {categories.map((category) => (
+                  {categories.map((category: any) => (
                     <ListItem
                       key={category.name}
                       button
@@ -184,7 +172,7 @@ export default function OrderScreen(props) {
               variant="h2"
               component="h2"
             >
-              {categoryName || 'Main Menu'}
+              {categoryName || "Main Menu"}
             </Typography>
 
             <Grid container spacing={1}>
@@ -193,7 +181,7 @@ export default function OrderScreen(props) {
               ) : errorProducts ? (
                 <Alert severity="error">{errorProducts}</Alert>
               ) : (
-                products.map((product) => (
+                products.map((product: any) => (
                   <Slide key={product.name} direction="up" in={true}>
                     <Grid item md={6}>
                       <Card
@@ -245,11 +233,11 @@ export default function OrderScreen(props) {
       </Box>
       <Box>
         <Box>
-          <Box className={[styles.bordered, styles.space]}>
+          <Box className={`${styles.bordered} ${styles.space} `}>
             My Order - {orderType} | Tax: ${taxPrice} | Total: ${totalPrice} |
             Items: {itemsCount}
           </Box>
-          <Box className={[styles.row, styles.around]}>
+          <Box className={`${styles.row} ${styles.around} `}>
             <Button
               onClick={() => {
                 clearOrder(dispatch);

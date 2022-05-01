@@ -1,13 +1,13 @@
-import React from 'react';
-import { Box, Button, CircularProgress, Typography } from '@material-ui/core';
-import { useStyles } from '../styles';
-import Logo from '../components/Logo';
-export default function CompleteOrderScreen(props) {
-  const styles = useStyles();
+import React from "react";
+import { Box, Button, CircularProgress, Typography } from "@material-ui/core";
+import { useStyles } from "../styles";
+import Logo from "../components/Logo";
+export default function CompleteOrderScreen(props: any) {
+  const styles: any = useStyles();
 
   return (
-    <Box className={[styles.root, styles.navy]}>
-      <Box className={[styles.main, styles.center]}>
+    <Box className={`${styles.root} ${styles.navy} `}>
+      <Box className={`${styles.main} ${styles.center} `}>
         <Box>
           <Logo large></Logo>
           <Typography
@@ -21,9 +21,9 @@ export default function CompleteOrderScreen(props) {
           <CircularProgress />
         </Box>
       </Box>
-      <Box className={[styles.center, styles.space]}>
+      <Box className={`${styles.center} ${styles.space} `}>
         <Button
-          onClick={() => props.history.push('/complete')}
+          onClick={() => props.history.push("/complete")}
           variant="contained"
           color="primary"
           className={styles.largeButton}

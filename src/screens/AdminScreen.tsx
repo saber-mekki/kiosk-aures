@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import { Store } from '../Store';
-import { listOrders } from '../actions';
+import React, { useContext, useEffect } from "react";
+import { Store } from "../Store";
+import { listOrders } from "../actions";
 import {
   Box,
   Button,
@@ -12,38 +12,38 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from '@material-ui/core';
-import { useStyles } from '../styles';
-import { Alert } from '@material-ui/lab';
-import Axios from 'axios';
-import { Helmet } from 'react-helmet';
-export default function AdminScreen(props) {
-  const styles = useStyles();
+} from "@material-ui/core";
+import { useStyles } from "../styles";
+import { Alert } from "@material-ui/lab";
+import Axios from "axios";
+import { Helmet } from "react-helmet";
+export default function AdminScreen(props: any) {
+  const styles: any = useStyles();
 
   const { state, dispatch } = useContext(Store);
   const { orders, loading, error } = state.orderList;
-  const setOrderStateHandler = async (order, action) => {
+  const setOrderStateHandler = async (order: any, action: any) => {
     try {
-      await Axios.put('/api/orders/' + order._id, {
+      await Axios.put("/api/orders/" + order._id, {
         action: action,
       });
       listOrders(dispatch);
-    } catch (err) {
+    } catch (err: any) {
       alert(err.message);
     }
   };
 
   useEffect(() => {
     listOrders(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
-    <Box className={[styles.root]}>
+    <Box className={styles.root}>
       <Helmet>
         <title>Admin Orders</title>
       </Helmet>
 
-      <Box className={[styles.main]}>
+      <Box className={styles.main}>
         {loading ? (
           <CircularProgress />
         ) : error ? (
@@ -64,7 +64,7 @@ export default function AdminScreen(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map((order) => (
+                {orders.map((order: any) => (
                   <TableRow key={order.name}>
                     <TableCell component="th" scope="row">
                       {order.number}
@@ -74,7 +74,7 @@ export default function AdminScreen(props) {
                       {order.orderItems.length}
                     </TableCell>
                     <TableCell align="right">
-                      {order.orderItems.map((item) => (
+                      {order.orderItems.map((item: any) => (
                         <Box>
                           {item.name} x {item.quantity}
                         </Box>
@@ -84,17 +84,17 @@ export default function AdminScreen(props) {
                     <TableCell align="right">{order.paymentType}</TableCell>
                     <TableCell align="right">
                       {order.inProgress
-                        ? 'In Progress'
+                        ? "In Progress"
                         : order.isReady
-                        ? 'Ready'
+                        ? "Ready"
                         : order.isDelivered
-                        ? 'Delivered'
-                        : 'Unknown'}
+                        ? "Delivered"
+                        : "Unknown"}
                     </TableCell>
                     <TableCell align="right">
                       <Button
                         variant="contained"
-                        onClick={() => setOrderStateHandler(order, 'ready')}
+                        onClick={() => setOrderStateHandler(order, "ready")}
                         color="secondary"
                       >
                         Ready
@@ -102,13 +102,13 @@ export default function AdminScreen(props) {
                       <Button
                         color="primary"
                         variant="contained"
-                        onClick={() => setOrderStateHandler(order, 'cancel')}
+                        onClick={() => setOrderStateHandler(order, "cancel")}
                       >
                         Cancel
                       </Button>
                       <Button
                         variant="contained"
-                        onClick={() => setOrderStateHandler(order, 'deliver')}
+                        onClick={() => setOrderStateHandler(order, "deliver")}
                       >
                         Deliver
                       </Button>

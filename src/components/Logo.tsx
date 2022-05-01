@@ -1,8 +1,8 @@
-import React from 'react';
-import { useStyles } from '../styles';
+import React from "react";
+import { useStyles } from "../styles";
 
-export default function Logo(props) {
-  const styles = useStyles();
+export default function Logo(props: any) {
+  const styles: any = useStyles();
   return (
     <img
       src="/images/logo.png"

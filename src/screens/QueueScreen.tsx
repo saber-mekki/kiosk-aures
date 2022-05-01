@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import { Store } from '../Store';
-import { listQueue } from '../actions';
+import React, { useContext, useEffect } from "react";
+import { Store } from "../Store";
+import { listQueue } from "../actions";
 import {
   Box,
   CircularProgress,
@@ -8,26 +8,26 @@ import {
   List,
   ListItem,
   Paper,
-} from '@material-ui/core';
-import { useStyles } from '../styles';
-import { Alert } from '@material-ui/lab';
-import { Helmet } from 'react-helmet';
-export default function QueueScreen(props) {
-  const styles = useStyles();
+} from "@material-ui/core";
+import { useStyles } from "../styles";
+import { Alert } from "@material-ui/lab";
+import { Helmet } from "react-helmet";
+export default function QueueScreen(props: any) {
+  const styles: any = useStyles();
 
   const { state, dispatch } = useContext(Store);
   const { queue, loading, error } = state.queueList;
 
   useEffect(() => {
     listQueue(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
-    <Box className={[styles.root]}>
+    <Box className={styles.root}>
       <Helmet>
         <title>Queue</title>
       </Helmet>
-      <Box className={[styles.main]}>
+      <Box className={styles.main}>
         {loading ? (
           <CircularProgress />
         ) : error ? (
@@ -38,7 +38,7 @@ export default function QueueScreen(props) {
               <Paper>
                 <h1 className={styles.processing}>In Progress</h1>
                 <List>
-                  {queue.inProgressOrders.map((order) => (
+                  {queue.inProgressOrders.map((order: any) => (
                     <ListItem key={order.number}>
                       <h1>{order.number}</h1>
                     </ListItem>
@@ -50,7 +50,7 @@ export default function QueueScreen(props) {
               <Paper>
                 <h1 className={styles.ready}>Now Serving </h1>
                 <List>
-                  {queue.servingOrders.map((order) => (
+                  {queue.servingOrders.map((order: any) => (
                     <ListItem key={order.number}>
                       <h1>{order.number}</h1>
                     </ListItem>
